@@ -1,6 +1,6 @@
 # Spider-Man Themed Portfolio Template
 
-A premium, cinematic portfolio template with Spider-Man/Spiderverse inspiration. Built with modern web technologies and designed for creative developers and designers.
+A premium, cinematic portfolio template with Spider-Man/Spiderverse inspiration. Built with modern web technologies and designed for high-impact professional showcases.
 
 ## 🎨 Features
 
