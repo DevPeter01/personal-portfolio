@@ -1,14 +1,8 @@
 import { motion } from 'framer-motion';
-import { Heart, ArrowUp, Github, Linkedin, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import { profileData } from '../../data/profileData';
 import { useSmoothScroll } from '../../utils/hooks';
 import { useState, useEffect } from 'react';
-
-const iconMap: Record<string, any> = {
-  github: Github,
-  linkedin: Linkedin,
-  instagram: Instagram,
-};
 
 export const Footer = () => {
   const { contact } = profileData;
@@ -23,163 +17,93 @@ export const Footer = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const quickLinks = [
-    { label: 'Home', id: 'hero' },
-    { label: 'About', id: 'about' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Contact', id: 'contact' },
+  const socials = [
+    { id: 'github', icon: Github, url: contact.social.find(s => s.icon === 'github')?.url || 'https://github.com' },
+    { id: 'linkedin', icon: Linkedin, url: contact.social.find(s => s.icon === 'linkedin')?.url || 'https://linkedin.com' },
+    { id: 'email', icon: Mail, url: `mailto:${contact.email}` },
   ];
 
   return (
-    <>
-      <footer className="relative bg-spiderman-darker border-t border-gray-800 overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-web-pattern opacity-5" style={{ backgroundSize: '30px 30px' }} />
-        
-        {/* Animated web line */}
+    <footer className="relative bg-spiderman-darker overflow-hidden py-24 md:py-32">
+      {/* Background FX */}
+      <div className="absolute inset-0 bg-web-pattern opacity-[0.03] pointer-events-none" style={{ backgroundSize: '40px 40px' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spiderman-red/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Main CTA */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-spiderman-red to-transparent"
-          animate={{
-            opacity: [0.3, 1, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-        />
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <h2 className="font-heading font-black text-4xl md:text-6xl text-white mb-8 tracking-tighter uppercase leading-[0.9]">
+            Ready to work with someone who can <span className="text-spiderman-red text-glow">build real systems?</span>
+          </h2>
+          
+          <p className="text-gray-400 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto">
+            Open to internships and full-time opportunities. Let's discuss how I can contribute to your team's mission.
+          </p>
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {/* Brand */}
-            <div>
-              <motion.div
-                className="flex items-center space-x-2 mb-4"
-                whileHover={{ scale: 1.05 }}
+          {/* Social Row */}
+          <div className="flex justify-center items-center gap-8 md:gap-12">
+            {socials.map((social, index) => (
+              <motion.a
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative p-4 rounded-full bg-white/5 border border-white/5 hover:border-spiderman-red/30 transition-all duration-300"
+                whileHover={{ scale: 1.15, y: -5 }}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-spiderman-red to-spiderman-darkRed flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
-                    <circle cx="12" cy="12" r="2" />
-                    {[...Array(8)].map((_, i) => {
-                      const angle = (i * Math.PI) / 4;
-                      const x = 12 + Math.cos(angle) * 8;
-                      const y = 12 + Math.sin(angle) * 8;
-                      return (
-                        <line
-                          key={i}
-                          x1="12"
-                          y1="12"
-                          x2={x}
-                          y2={y}
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        />
-                      );
-                    })}
-                  </svg>
-                </div>
-                <span className="font-heading font-bold text-xl text-white">
-                  Peterfolio
-                </span>
-              </motion.div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Building digital experiences with creativity, precision, and passion.
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h3 className="font-heading font-bold text-white mb-4">Quick Links</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {quickLinks.map((link) => (
-                  <motion.button
-                    key={link.id}
-                    onClick={() => scrollToSection(link.id)}
-                    className="text-gray-400 hover:text-spiderman-red transition-colors text-sm text-left"
-                    whileHover={{ x: 5 }}
-                  >
-                    {link.label}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-
-            {/* Social */}
-            <div>
-              <h3 className="font-heading font-bold text-white mb-4">Connect</h3>
-              <div className="flex flex-wrap gap-3">
-                {contact.social.map((social, index) => {
-                  const Icon = iconMap[social.icon] || Github;
-                  return (
-                    <motion.a
-                      key={index}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-lg bg-gray-900/50 border border-gray-800 flex items-center justify-center hover:border-spiderman-red/50 transition-colors text-gray-400 hover:text-spiderman-red"
-                      whileHover={{ scale: 1.1, y: -3 }}
-                      whileTap={{ scale: 0.95 }}
-                      title={social.platform}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom bar */}
-          <motion.div
-            className="pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-gray-400 text-sm flex items-center gap-2">
-              <span>Made with</span>
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                <Heart className="w-4 h-4 text-spiderman-red fill-current" />
-              </motion.span>
-              <span>by {profileData.personal.name}</span>
-            </p>
-            <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} All rights reserved.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Decorative web in corner */}
-        <div className="absolute bottom-4 right-4 w-24 h-24 opacity-5 pointer-events-none">
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-            <circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-            <circle cx="50" cy="50" r="16" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-            {[...Array(8)].map((_, i) => (
-              <line
-                key={i}
-                x1="50"
-                y1="50"
-                x2={50 + 40 * Math.cos((i * Math.PI) / 4)}
-                y2={50 + 40 * Math.sin((i * Math.PI) / 4)}
-                stroke="currentColor"
-                strokeWidth="1"
-                className="text-spiderman-red"
-              />
+                {/* Glow ring on hover */}
+                <div className="absolute inset-0 rounded-full bg-spiderman-red/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity" />
+                
+                <social.icon className="w-6 h-6 md:w-8 md:h-8 text-gray-400 group-hover:text-spiderman-red relative z-10 transition-colors" />
+                
+                <motion.div
+                  className="absolute -top-12 left-1/2 -translate-x-1/2 bg-spiderman-red text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
+                  initial={{ y: 10 }}
+                  whileHover={{ y: 0 }}
+                >
+                  {social.id}
+                </motion.div>
+              </motion.a>
             ))}
-          </svg>
-        </div>
-      </footer>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Spider web detail in corner */}
+      <div className="absolute -bottom-10 -right-10 w-48 h-48 opacity-10 pointer-events-none rotate-180">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <circle cx="0" cy="0" r="80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-spiderman-red" />
+          <circle cx="0" cy="0" r="60" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-spiderman-red" />
+          <circle cx="0" cy="0" r="40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-spiderman-red" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-spiderman-red" />
+          {[...Array(6)].map((_, i) => (
+            <line
+              key={i}
+              x1="0"
+              y1="0"
+              x2={80 * Math.cos((i * Math.PI) / 10)}
+              y2={80 * Math.sin((i * Math.PI) / 10)}
+              stroke="currentColor"
+              strokeWidth="0.5"
+              className="text-spiderman-red"
+            />
+          ))}
+        </svg>
+      </div>
 
       {/* Back to top button */}
       {showBackToTop && (
         <motion.button
-          className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-spiderman-red to-spiderman-darkRed flex items-center justify-center shadow-lg shadow-spiderman-red/50 z-50"
+          className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-spiderman-red to-spiderman-darkRed flex items-center justify-center shadow-lg shadow-spiderman-red/50 z-50 overflow-hidden"
           onClick={() => scrollToSection('hero')}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -187,14 +111,14 @@ export const Footer = () => {
           whileHover={{ scale: 1.1, y: -5 }}
           whileTap={{ scale: 0.9 }}
         >
-          <ArrowUp className="w-6 h-6 text-white" />
+          <ArrowUp className="w-6 h-6 text-white relative z-10" />
           <motion.div
-            className="absolute inset-0 rounded-full bg-spiderman-red opacity-50 blur-md"
+            className="absolute inset-0 bg-spiderman-red opacity-50 blur-md"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
         </motion.button>
       )}
-    </>
+    </footer>
   );
 };
