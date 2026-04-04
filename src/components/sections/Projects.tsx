@@ -55,14 +55,6 @@ export const Projects = () => {
             System Showcases
           </RevealText>
           
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl font-light"
-          >
-            Engineering robust technical ecosystems from <span className="text-spiderman-red font-semibold underline decoration-spiderman-red/30 underline-offset-4">satellite-powered AI</span> to <span className="text-spiderman-electricBlue font-semibold underline decoration-spiderman-electricBlue/30 underline-offset-4">real-time monitoring</span> systems.
-          </motion.p>
         </div>
 
         {/* Project Grid */}
