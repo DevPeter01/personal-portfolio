@@ -61,11 +61,27 @@ export const Footer = () => {
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-spiderman-red to-spiderman-darkRed flex items-center justify-center">
                   <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
-                    <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z" />
+                    <circle cx="12" cy="12" r="2" />
+                    {[...Array(8)].map((_, i) => {
+                      const angle = (i * Math.PI) / 4;
+                      const x = 12 + Math.cos(angle) * 8;
+                      const y = 12 + Math.sin(angle) * 8;
+                      return (
+                        <line
+                          key={i}
+                          x1="12"
+                          y1="12"
+                          x2={x}
+                          y2={y}
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                      );
+                    })}
                   </svg>
                 </div>
                 <span className="font-heading font-bold text-xl text-white">
-                  Portfolio
+                  Peterfolio
                 </span>
               </motion.div>
               <p className="text-gray-400 text-sm leading-relaxed">

@@ -223,7 +223,7 @@ export const Hero = () => {
                   {/* Profile image with Spider-Man color grading */}
                   <img
                     src="/mm.jpeg"
-                    alt="Peter - Portfolio"
+                    alt="Peter - Peterfolio"
                     className="w-full h-full object-cover"
                     style={{
                       filter: 'contrast(1.15) brightness(0.75) saturate(1.1) hue-rotate(-8deg)',

@@ -92,7 +92,7 @@ export const Header = () => {
               />
             </div>
             <span className="font-heading font-bold text-xl text-white hidden sm:block group-hover:text-spiderman-red transition-colors">
-              Portfolio
+              Peterfolio
             </span>
           </motion.div>
 
