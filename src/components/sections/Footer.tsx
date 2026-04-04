@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, ArrowUp, Github, Linkedin, Instagram, Dribbble } from 'lucide-react';
+import { Heart, ArrowUp, Github, Linkedin, Instagram } from 'lucide-react';
 import { profileData } from '../../data/profileData';
 import { useSmoothScroll } from '../../utils/hooks';
 import { useState, useEffect } from 'react';
@@ -8,7 +8,6 @@ const iconMap: Record<string, any> = {
   github: Github,
   linkedin: Linkedin,
   instagram: Instagram,
-  dribbble: Dribbble,
 };
 
 export const Footer = () => {

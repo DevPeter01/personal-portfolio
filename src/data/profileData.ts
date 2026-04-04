@@ -7,14 +7,18 @@ export interface ProfileData {
     location: string;
   };
   hero: {
+    availability: string;
+    techStack: string[];
+    proofStrip: string[];
     stats: {
-      projects: number;
+      projects: number | string;
       experience: string;
-      clients: number;
+      clients?: number;
     };
     cta: {
       primary: string;
       secondary: string;
+      resumeUrl?: string;
     };
   };
   about: {
@@ -29,7 +33,7 @@ export interface ProfileData {
     category: string;
     items: {
       name: string;
-      level: number; // 0-100
+      desc: string;
       icon?: string;
     }[];
   }[];
@@ -65,20 +69,23 @@ export interface ProfileData {
 
 export const profileData: ProfileData = {
   personal: {
-    name: 'Peter',
-    role: 'Full Stack Developer (Intern) — Front-End Developer',
-    tagline: 'Building responsive and scalable web apps with a focus on problem-solving, not just aesthetics',
-    location: 'Namakkal, Tamil Nadu',
+    name: 'Rohith',
+    role: 'MERN Stack Developer ',
+    tagline: 'MERN Stack Developer with hands-on experience building scalable web applications, clean APIs, and production-ready user interfaces.',
+    location: 'Coimbatore, Tamil Nadu',
   },
   hero: {
+    availability: 'AVAILABLE FOR HIRE',
+    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript'],
+    proofStrip: ['2+ Internships', '5+ Projects Built', 'Hackathon Finalist'],
     stats: {
-      projects: 47,
+      projects: '5+',
       experience: '1+ Year',
-      clients: 32,
     },
     cta: {
-      primary: 'View Projects',
-      secondary: 'Get In Touch',
+      primary: 'View My Work',
+      secondary: 'Download Resume',
+      resumeUrl: '/Rohith-Resume.pdf',
     },
   },
   about: {
@@ -113,174 +120,164 @@ export const profileData: ProfileData = {
     {
       category: 'Frontend',
       items: [
-        { name: 'React', level: 90 },
-        { name: 'Tailwind CSS', level: 88 },
-        { name: 'Bootstrap', level: 85 },
-        { name: 'JavaScript', level: 87 },
-        { name: 'Responsive UI', level: 90 },
-        { name: 'TypeScript', level: 75 },
+        { name: 'React', desc: 'Built scalable UI components and routing systems in real-world projects and internships' },
+        { name: 'Tailwind CSS', desc: 'Developed responsive and modern UI with utility-first styling' },
+        { name: 'JavaScript', desc: 'Strong in async programming, API integration, and debugging' },
+        { name: 'Responsive UI', desc: 'Built mobile-friendly and accessible layouts across devices' },
+        { name: 'TypeScript', desc: 'Used for type-safe components and improved code reliability' },
       ],
     },
     {
       category: 'Backend',
       items: [
-        { name: 'Node.js', level: 85 },
-        { name: 'Express.js', level: 85 },
-        { name: 'MongoDB', level: 82 },
-        { name: 'SQL', level: 80 },
-        { name: 'REST APIs', level: 88 },
-        { name: 'GraphQL', level: 65 },
+        { name: 'Node.js', desc: 'Built backend services and handled server-side logic' },
+        { name: 'Express.js', desc: 'Developed REST APIs and middleware for scalable apps' },
+        { name: 'MongoDB', desc: 'Designed schemas and handled database operations' },
+        { name: 'SQL', desc: 'Worked with structured data and relational queries' },
+        { name: 'REST APIs', desc: 'Integrated and built APIs for real-world applications' },
       ],
     },
     {
       category: 'Languages & Tools',
       items: [
-        { name: 'Java', level: 85 },
-        { name: 'Python', level: 82 },
-        { name: 'JavaScript', level: 87 },
-        { name: 'Git', level: 88 },
-        { name: 'VS Code', level: 90 },
-        { name: 'Figma', level: 80 },
+        { name: 'Java', desc: 'Used for problem solving and backend logic' },
+        { name: 'Python', desc: 'Applied in scripting and AI-related projects' },
+        { name: 'Git', desc: 'Version control and collaborative workflows' },
+        { name: 'VS Code', desc: 'Primary development environment' },
+        { name: 'Figma', desc: 'Basic UI/UX design and prototyping' },
       ],
     },
   ],
   experience: [
     {
+      company: 'Hindusthan Educational Institutions',
+      role: 'Frontend Developer Intern',
+      period: 'Sep 2025 – Feb 2026',
+      description: [
+        'Developed and maintained responsive React components for academic and administrative portals',
+        'Built reusable UI modules including data tables, filters, and tab-based navigation systems',
+        'Enhanced UI consistency, accessibility, and user experience across multiple modules',
+      ],
+      tags: ['React', 'Tailwind CSS', 'UI Components', 'Accessibility'],
+    },
+    {
       company: 'Casagenix (UK Based)',
       role: 'Full Stack Developer Intern',
-      period: '2025 - Present',
+      period: 'Jun 2025 – Jul 2026',
       description: [
-        'Contributed to modules in a contractor job & work order management platform',
-        'Integrated REST APIs, improved UI responsiveness, and optimized component rendering',
-        'Worked across dev lifecycle: design, development, testing, deployment',
+        'Contributed to a contractor job and work-order management platform used for real-world operations',
+        'Integrated and consumed REST APIs to manage workflows, status tracking, and data synchronization',
+        'Improved component performance and UI responsiveness in React-based modules',
+        'Collaborated across frontend, backend, testing, and deployment in an Agile environment',
       ],
-      tags: ['React', 'REST APIs', 'UI/UX', 'Testing'],
-    },
-    {
-      company: 'Hindusthan Educational Institutions',
-      role: 'Front-End Developer',
-      period: '2025 - Present',
-      description: [
-        'Developed production-level web pages using React, Tailwind and routing-based navigation',
-        'Built dynamic components: data tables, category filters, and tabbed views',
-        'Improved accessibility, responsiveness, and layout structure across pages',
-      ],
-      tags: ['React', 'Tailwind', 'Responsive Design', 'Accessibility'],
-    },
-    {
-      company: 'StartUp Innovations',
-      role: 'Junior Web Developer',
-      period: '2019 - 2020',
-      description: [
-        'Developed and maintained client websites using modern frameworks',
-        'Implemented responsive designs and ensured cross-browser compatibility',
-        'Participated in agile development cycles and code reviews',
-      ],
-      tags: ['HTML', 'CSS', 'JavaScript', 'Vue.js'],
+      tags: ['React', 'Node.js', 'REST APIs', 'Agile'],
     },
   ],
   projects: [
     {
-      id: 'proj-1',
-      title: 'InterviewQB - Smart Interview Question Bank',
-      category: 'web',
-      shortDescription: 'Automated question generation, filtering, and assessment flow',
-      fullDescription: 'Smart interview question bank system designed for students preparing for placements. Features automated question generation with structured practice sets, category-based filtering, and comprehensive assessment tracking to help students ace technical interviews.',
+      id: "proj-1",
+      title: "College Website - Hindusthan Institute",
+      category: "web",
+      shortDescription: "Responsive multi-page academic website",
+      fullDescription:
+        "Designed and developed a responsive college website with structured routing and reusable components for academic and administrative content.",
       role: [
-        'Full-stack development',
-        'Question generation system',
-        'Filter & assessment logic',
-        'Student-focused UI design',
+        "Frontend architecture design",
+        "Built reusable UI components",
+        "Implemented routing system",
+        "Ensured responsive design"
       ],
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express.js'],
-      github: 'https://github.com',
+      technologies: ["React", "Tailwind CSS", "JavaScript"],
+      github: "https://github.com"
     },
     {
-      id: 'proj-2',
-      title: 'AI Resume Advisor - Resume Improvement System',
-      category: 'web',
-      shortDescription: 'AI-Based Resume Improvement System',
-      fullDescription: 'AI-powered resume analysis system that provides intelligent feedback and actionable suggestions for improvement. Uses advanced AI prompts to analyze resumes and suggest improvements focused on clarity, structure, ATS acceptance, and overall job readiness.',
+      id: "proj-2",
+      title: "AquaNet AI - Satellite-Powered Fishing Intelligence",
+      category: "web",
+      shortDescription: "Satellite-based fishing zone predictor and route optimizer",
+      fullDescription:
+        "A comprehensive intelligence platform that fuses satellite oceanography (SST, Chlorophyll), Gradient Boosting ML models, and real-time weather to predict high-confidence fishing zones for Tamil Nadu fishermen. Features multi-objective route optimization and offline-first persistence for maritime operations.",
       role: [
-        'AI integration',
-        'Feedback prompt engineering',
-        'Resume parsing & analysis',
-        'Improvement suggestion engine',
+        "Developed Gradient Boosting ML ensemble for species prediction",
+        "Built interactive Leaflet.js maritime map with 4 layer modes",
+        "Implemented multi-criteria route optimization algorithm",
+        "Designed high-performance FastAPI backend with JWT protection"
       ],
-      technologies: ['React', 'Python', 'AI/ML', 'Natural Language Processing'],
-      github: 'https://github.com',
+      technologies: ["React", "FastAPI", "ML", "Leaflet.js", "Satellite Data"],
+      github: "https://github.com"
     },
     {
-      id: 'proj-3',
-      title: 'Design System Library',
-      category: 'ui',
-      shortDescription: 'Comprehensive component library for rapid development',
-      fullDescription: 'A modern, accessible design system built for consistency across products. Includes 50+ components, documentation, and Figma integration for design-to-code workflow.',
+      id: "proj-3",
+      title: "Sentinel - Real-Time Intelligence Monitoring System",
+      category: "web",
+      shortDescription: "Real-time OSINT data aggregation and analysis system",
+      fullDescription:
+        "Built a real-time monitoring system that aggregates multiple open-source intelligence (OSINT) data sources. Implemented backend APIs to process live data streams and developed interactive UI components to analyze patterns and detect anomalies.",
       role: [
-        'Component architecture',
-        'Documentation',
-        'Accessibility compliance',
-        'Theme system design',
+        "Designed real-time data processing workflows",
+        "Developed backend APIs for streaming data",
+        "Built interactive visualization components",
+        "Handled end-to-end system integration"
       ],
-      technologies: ['React', 'TypeScript', 'Storybook', 'CSS Modules', 'Figma'],
-      github: 'https://github.com',
-      live: 'https://demo.com',
+      technologies: ["React", "Node.js", "MongoDB", "REST APIs"],
+      github: "https://github.com"
     },
     {
-      id: 'proj-4',
-      title: 'REST API Backend',
-      category: 'backend',
-      shortDescription: 'Scalable microservices architecture',
-      fullDescription: 'A robust backend API serving multiple client applications. Features authentication, rate limiting, caching, and comprehensive logging for enterprise-grade reliability.',
+      id: "proj-4",
+      title: "PlacementPrep - AI Interview Preparation Platform",
+      category: "web",
+      shortDescription: "AI-powered interview preparation and learning platform",
+      fullDescription:
+        "Developed a full-stack platform for company-specific interview preparation. Implemented adaptive learning roadmaps based on user performance and preparation timelines, helping users improve systematically.",
       role: [
-        'API design',
-        'Database optimization',
-        'Security implementation',
-        'Documentation',
+        "Full-stack development",
+        "Designed adaptive learning logic",
+        "Built performance tracking system",
+        "Developed user-focused UI flows"
       ],
-      technologies: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'JWT', 'Docker'],
-      github: 'https://github.com',
+      technologies: ["React", "Node.js", "MongoDB", "AI Integration"],
+      github: "https://github.com"
     },
     {
-      id: 'proj-5',
-      title: 'Portfolio Showcase',
-      category: 'web',
-      shortDescription: 'Animated portfolio with smooth interactions',
-      fullDescription: 'A stunning portfolio website featuring advanced animations, scroll effects, and interactive elements. Built to showcase creative work with optimal performance.',
+      id: "proj-5",
+      title: "Smart Campus Attendance & LMS",
+      category: "web",
+      shortDescription: "Automated attendance and learning management system",
+      fullDescription:
+        "Developed a smart campus system using Wi-Fi verification and face recognition for attendance tracking. Included scheduling, notifications, and reporting features for academic workflows.",
       role: [
-        'Frontend development',
-        'Animation implementation',
-        'Performance optimization',
-        'Responsive design',
+        "Developed attendance tracking system",
+        "Integrated authentication and verification",
+        "Built scheduling and notification modules",
+        "Handled system workflow automation"
       ],
-      technologies: ['React', 'Framer Motion', 'Tailwind', 'Vite'],
-      github: 'https://github.com',
-      live: 'https://demo.com',
+      technologies: ["React", "Node.js", "MongoDB", "AI"],
+      github: "https://github.com"
     },
     {
-      id: 'proj-6',
-      title: 'Weather Dashboard',
-      category: 'web',
-      shortDescription: 'Real-time weather app with beautiful UI',
-      fullDescription: 'A sleek weather application providing accurate forecasts with an intuitive interface. Features location-based weather, hourly/weekly forecasts, and weather maps.',
+      id: "proj-6",
+      title: "AI Resume Advisor",
+      category: "web",
+      shortDescription: "AI-based resume analysis and improvement system",
+      fullDescription:
+        "Built a resume analysis tool that evaluates structure, clarity, and ATS compatibility. Generates actionable suggestions using rule-based logic and AI-assisted prompts.",
       role: [
-        'API integration',
-        'UI design',
-        'Data visualization',
-        'PWA implementation',
+        "Designed resume parsing logic",
+        "Implemented AI-based feedback system",
+        "Built improvement suggestion engine",
+        "Focused on ATS optimization"
       ],
-      technologies: ['Vue.js', 'TypeScript', 'Weather API', 'Chart.js', 'Tailwind'],
-      live: 'https://demo.com',
-    },
+      technologies: ["React", "Python", "AI", "NLP"],
+      github: "https://github.com"
+    }
   ],
   contact: {
     email: 'rohithcs1414@gmail.com',
     phone: '+91 99526 52246',
     social: [
       { platform: 'GitHub', url: 'https://github.com', icon: 'github' },
-      { platform: 'LinkedIn', url: 'https://linkedin.com/in/rohith-palanivel-a0089b304', icon: 'linkedin' },
+      { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/rohith-palanivel-a0089b304', icon: 'linkedin' },
       { platform: 'Instagram', url: 'https://www.instagram.com/xmnot_peter?igsh=MXI3MXQxcHdvZW9qZQ==', icon: 'instagram' },
-      { platform: 'Dribbble', url: 'https://dribbble.com', icon: 'dribbble' },
     ],
   },
 };

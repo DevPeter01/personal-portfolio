@@ -1,179 +1,193 @@
-import { motion } from 'framer-motion';
-import { Briefcase } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { Briefcase, CheckCircle2 } from 'lucide-react';
 import { profileData } from '../../data/profileData';
 import { RevealText } from '../ui/RevealText';
+import { useRef } from 'react';
 
 export const Experience = () => {
   const { experience } = profileData;
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
-    <section id="experience" className="relative py-20 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-spiderman-dark via-spiderman-darker to-spiderman-dark" />
-      <div className="absolute inset-0 bg-web-pattern opacity-5" style={{ backgroundSize: '30px 30px' }} />
+    <section id="experience" className="relative py-24 md:py-40 overflow-hidden bg-spiderman-darker">
+      {/* 🕸️ Background Elements */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div 
+          className="w-full h-full" 
+          style={{ 
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #E62429 1px, transparent 0)',
+            backgroundSize: '40px 40px' 
+          }} 
+        />
+      </div>
+      
+      {/* 🌌 Ambience Glow */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-spiderman-red/10 blur-[150px] -z-10" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-spiderman-electricBlue/5 blur-[150px] -z-10" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
+        {/* Section Header */}
+        <div className="text-center mb-24">
           <motion.div
-            className="inline-block mb-4"
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'spring', stiffness: 200 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-spiderman-red/10 border border-spiderman-red/20 mb-6"
           >
-            <span className="px-4 py-2 rounded-full bg-spiderman-red/10 border border-spiderman-red/30 text-spiderman-red text-sm font-semibold">
-              MISSION LOG
-            </span>
+            <Briefcase className="w-4 h-4 text-spiderman-red" />
+            <span className="text-xs font-black text-spiderman-red uppercase tracking-widest leading-none">Experience Timeline </span>
           </motion.div>
           
-          <RevealText className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-            Experience
+          <RevealText className="font-heading font-black text-5xl md:text-6xl lg:text-8xl text-white mb-8 uppercase tracking-tighter">
+            The Multiverse Log
           </RevealText>
           
           <motion.div
-            className="w-24 h-1 mx-auto bg-gradient-to-r from-spiderman-red to-spiderman-electricBlue rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
+            className="w-32 h-1.5 mx-auto bg-spiderman-red rounded-full"
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: 128, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           />
         </div>
 
-        {/* Timeline */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Web strand path */}
-          <motion.div
-            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-spiderman-red via-spiderman-electricBlue to-spiderman-red transform -translate-x-1/2"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5 }}
-          />
+        {/* 🧬 Combined Timeline System */}
+        <div ref={containerRef} className="max-w-6xl mx-auto relative px-4 md:px-0">
+          {/* 📍 Timeline Spine (The Web Line) */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
+            <motion.div 
+              style={{ scaleY }}
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-spiderman-red via-spiderman-red to-transparent origin-top shadow-[0_0_15px_#E62429]"
+            />
+          </div>
 
-          {/* Experience items */}
-          <div className="space-y-12">
+          <div className="space-y-24 md:space-y-32">
             {experience.map((exp, index) => (
-              <motion.div
-                key={index}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                {/* Content */}
-                <div className="flex-1 md:w-1/2">
-                  <motion.div
-                    className={`relative bg-gradient-to-br from-gray-900 to-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 md:p-8 ${
-                      index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
-                    }`}
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                  >
-                    {/* Glow effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-spiderman-red/20 to-spiderman-blue/20 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity -z-10"
-                    />
-
-                    {/* Period badge */}
-                    <motion.div
-                      className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-spiderman-red/10 border border-spiderman-red/30"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <Briefcase className="w-4 h-4 text-spiderman-red" />
-                      <span className="text-sm text-spiderman-red font-semibold">{exp.period}</span>
-                    </motion.div>
-
-                    {/* Role */}
-                    <h3 className="text-2xl font-bold text-white mb-2 font-heading">
-                      {exp.role}
-                    </h3>
-                    
-                    {/* Company */}
-                    <p className="text-spiderman-electricBlue font-medium mb-4">
-                      {exp.company}
-                    </p>
-
-                    {/* Description */}
-                    <ul className="space-y-2 mb-4">
-                      {exp.description.map((item, i) => (
-                        <motion.li
-                          key={i}
-                          className="text-gray-300 text-sm flex items-start gap-2"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.2 + i * 0.1 }}
-                        >
-                          <span className="text-spiderman-red mt-1">▸</span>
-                          <span>{item}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tags.map((tag, i) => (
-                        <motion.span
-                          key={i}
-                          className="px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-300 border border-gray-700"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.2 + i * 0.05 }}
-                          whileHover={{ scale: 1.1, borderColor: '#E62429' }}
-                        >
-                          {tag}
-                        </motion.span>
-                      ))}
-                    </div>
-
-                    {/* Decorative corner web */}
-                    <div className={`absolute bottom-4 ${index % 2 === 0 ? 'right-4' : 'left-4'} w-12 h-12 opacity-10`}>
-                      <svg viewBox="0 0 48 48" className="w-full h-full">
-                        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-                        <circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-                        <circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" strokeWidth="1" className="text-spiderman-red" />
-                        {[...Array(8)].map((_, i) => (
-                          <line
-                            key={i}
-                            x1="24"
-                            y1="24"
-                            x2={24 + 20 * Math.cos((i * Math.PI) / 4)}
-                            y2={24 + 20 * Math.sin((i * Math.PI) / 4)}
-                            stroke="currentColor"
-                            strokeWidth="1"
-                            className="text-spiderman-red"
-                          />
-                        ))}
-                      </svg>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Timeline node */}
-                <motion.div
-                  className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-spiderman-red to-spiderman-darkRed border-4 border-spiderman-darker z-10"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 + 0.3, type: 'spring', stiffness: 300 }}
-                  whileHover={{ scale: 1.5 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 rounded-full bg-spiderman-red opacity-50 blur-md"
-                    animate={{ scale: [1, 1.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </motion.div>
-              </motion.div>
+              <ExperienceEntry key={index} exp={exp} index={index} />
             ))}
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const ExperienceEntry = ({ exp, index }: { exp: any; index: number }) => {
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className={`relative flex flex-col md:flex-row items-center justify-between ${isEven ? 'md:flex-row-reverse' : ''}`}>
+      {/* 🔮 Experience Card */}
+      <motion.div 
+        className="w-full md:w-[45%] group"
+        initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.2, type: 'spring' }}
+      >
+        <div className="relative p-1 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl group-hover:border-spiderman-red/30 transition-all duration-500 overflow-hidden">
+          {/* Card Shimmer */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+          />
+          
+          <div className="relative p-8 md:p-10 z-10">
+            {/* Period Badge */}
+            <div className={`absolute top-0 ${isEven ? 'right-0' : 'left-0'} px-6 py-2 bg-gradient-to-br from-spiderman-red to-spiderman-darkRed text-white text-xs font-black tracking-widest rounded-bl-3xl md:rounded-br-3xl uppercase shadow-glow`}>
+              {exp.period}
+            </div>
+
+            {/* Header */}
+            <div className="mb-8 pt-4">
+              <h3 className="text-3xl font-black text-white font-heading uppercase tracking-tight mb-2 group-hover:text-spiderman-red transition-colors duration-300">
+                {exp.role}
+              </h3>
+              <div className="flex flex-wrap items-center gap-4 text-gray-400">
+                <span className="flex items-center gap-1.5 font-bold text-spiderman-electricBlue/80 italic">
+                  <Briefcase className="w-4 h-4" />
+                  {exp.company}
+                </span>
+              </div>
+            </div>
+
+            {/* Bullets */}
+            <ul className="space-y-4 mb-10">
+              {exp.description.map((bullet: string, i: number) => (
+                <motion.li 
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + i * 0.1 }}
+                  className="flex items-start gap-4 text-gray-400 group/bullet"
+                >
+                  <div className="mt-1.5 shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-spiderman-red group-hover/bullet:scale-125 transition-transform" />
+                  </div>
+                  <span className="text-base leading-relaxed group-hover/bullet:text-gray-200 transition-colors">{bullet}</span>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {exp.tags.map((tag: string, i: number) => (
+                <motion.span 
+                  key={i}
+                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(230, 36, 41, 0.2)', borderColor: '#E62429' }}
+                  className="px-4 py-1.5 text-xs font-black bg-white/5 border border-white/10 text-gray-400 rounded-full uppercase tracking-tighter transition-all cursor-default"
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+
+          {/* Spider-Suit Texture Accent */}
+          <div className={`absolute bottom-0 ${isEven ? 'left-0' : 'right-0'} w-24 h-24 pointer-events-none opacity-[0.05]`}>
+            <svg viewBox="0 0 100 100" className="w-full h-full stroke-spiderman-red">
+              <circle cx="50" cy="50" r="40" fill="none" strokeWidth="1" />
+              <circle cx="50" cy="50" r="25" fill="none" strokeWidth="1" />
+              <path d="M50 10 L50 90 M10 50 L90 50 M21.7 21.7 L78.3 78.3 M78.3 21.7 L21.7 78.3" strokeWidth="1" />
+            </svg>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 💓 Heartbeat Node */}
+      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center z-20">
+        <motion.div 
+          className="w-8 h-8 rounded-full bg-spiderman-darker border-4 border-spiderman-red relative group/node cursor-pointer"
+          whileHover={{ scale: 1.5 }}
+        >
+          {/* Heartbeat Pulse */}
+          <motion.div 
+            className="absolute inset-0 rounded-full bg-spiderman-red opacity-50 blur-md"
+            animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          
+          {/* Ripple on Hover */}
+          <div className="absolute inset-0 rounded-full bg-spiderman-red opacity-0 group-hover/node:animate-ping group-hover:opacity-100" />
+          
+          {/* Inner Dot */}
+          <div className="absolute inset-2 rounded-full bg-spiderman-red group-hover/node:scale-110 transition-transform" />
+        </motion.div>
+      </div>
+
+      {/* 🚀 Empty Half for Layout Balance */}
+      <div className="hidden md:block w-[45%]" />
+    </div>
   );
 };
