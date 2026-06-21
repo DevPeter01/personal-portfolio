@@ -188,7 +188,7 @@ export const profileData: ProfileData = {
         "Ensured responsive design"
       ],
       technologies: ["React", "Tailwind CSS", "JavaScript"],
-      github: "https://github.com"
+      github: "https://github.com/skumarscse-skillsafari/hitech.git"
     },
     {
       id: "proj-2",
@@ -204,7 +204,7 @@ export const profileData: ProfileData = {
         "Designed high-performance FastAPI backend with JWT protection"
       ],
       technologies: ["React", "FastAPI", "ML", "Leaflet.js", "Satellite Data"],
-      github: "https://github.com"
+      github: "https://github.com/DevPeter01/AquaNet.git"
     },
     {
       id: "proj-3",
@@ -236,7 +236,7 @@ export const profileData: ProfileData = {
         "Developed user-focused UI flows"
       ],
       technologies: ["React", "Node.js", "MongoDB", "AI Integration"],
-      github: "https://github.com"
+      github: "https://github.com/DevPeter01/PathForge.git"
     },
     {
       id: "proj-5",
@@ -268,7 +268,7 @@ export const profileData: ProfileData = {
         "Focused on ATS optimization"
       ],
       technologies: ["React", "Python", "AI", "NLP"],
-      github: "https://github.com"
+      github: "https://github.com/DevPeter01/ai-resume-advisor.git"
     }
   ],
   contact: {

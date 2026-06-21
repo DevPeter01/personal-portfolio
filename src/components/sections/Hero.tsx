@@ -4,9 +4,9 @@ import { profileData } from '../../data/profileData';
 import { RevealLetters, RevealText } from '../ui/RevealText';
 import { GlowButton } from '../ui/GlowButton';
 import { useSmoothScroll } from '../../utils/hooks';
-import { SpiderWebBackground, CitySkyline } from '../ui/SpiderWeb';
-import { SpiderDecor } from '../ui/SpiderDecor';
 import { animations } from '../../utils/theme';
+import { HudAvatar } from '../ui/HudAvatar';
+import { CinematicBackground } from '../ui/CinematicBackground';
 
 export const Hero = () => {
   const { personal, hero } = profileData;
@@ -14,35 +14,10 @@ export const Hero = () => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
 
-
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-spiderman-dark">
-      {/* Spider-Man themed background */}
-      <SpiderWebBackground variant="hero" />
-
-      {/* Animated web lines spanning viewport */}
-      {[...Array(12)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-px h-full origin-top"
-          style={{
-            left: `${(i + 1) * 8}%`,
-            background: `linear-gradient(to bottom, 
-              transparent, 
-              rgba(230, 36, 41, ${0.1 + (i % 3) * 0.05}) 30%, 
-              rgba(0, 217, 255, ${0.1 + (i % 2) * 0.05}) 70%, 
-              transparent)`,
-          }}
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: 1 }}
-          transition={{ duration: 1.5, delay: i * 0.1 }}
-        />
-      ))}
-
-      {/* City skyline */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 opacity-60">
-        <CitySkyline />
-      </div>
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden" style={{ background: '#020617' }}>
+      {/* Multi-layer cinematic background system */}
+      <CinematicBackground />
 
       {/* Content with split layout */}
       <motion.div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20" style={{ y }}>
@@ -191,83 +166,14 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right: Profile image with Spider-Man frame */}
+          {/* Right: HudAvatar instead of profile image */}
           <motion.div
             className="relative flex justify-center lg:justify-end"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <div className="relative">
-              {/* Spider emblem watermark behind */}
-              <SpiderDecor type="spider-emblem" position="center" size="lg" opacity={0.1} className="-z-10" />
-              
-              {/* Profile image container with web frame */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80">
-                {/* Web outline tracing animation */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border-4 border-spiderman-red"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 1, delay: 1 }}
-                />
-                <motion.div
-                  className="absolute inset-0 rounded-full border-4 border-spiderman-electricBlue"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 1, delay: 1.2 }}
-                />
-                
-                {/* Mask-lens style frame */}
-                <div className="absolute inset-4 rounded-full overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-gray-700">
-                  {/* Profile image with Spider-Man color grading */}
-                  <img
-                    src="/mm.jpeg"
-                    alt="Peter - Peterfolio"
-                    className="w-full h-full object-cover"
-                    style={{
-                      filter: 'contrast(1.15) brightness(0.75) saturate(1.1) hue-rotate(-8deg)',
-                      mixBlendMode: 'normal',
-                    }}
-                  />
-                  
-                  {/* Dark overlay to match theme */}
-                  <div className="absolute inset-0 bg-black/30" />
-                  
-                  {/* Spider-Man color overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-spiderman-red/15 via-transparent to-spiderman-blue/15 mix-blend-soft-light" />
-                  
-                  {/* Lens reflection effect */}
-                  <div className="absolute top-8 left-12 w-24 h-24 rounded-full bg-gradient-to-br from-white/20 to-transparent blur-xl" />
-                </div>
-                
-                {/* Corner web decorations */}
-                <SpiderDecor type="web-corner" position="top-left" size="sm" opacity={0.4} />
-                <SpiderDecor type="web-corner" position="bottom-right" size="sm" opacity={0.4} />
-                
-                {/* Floating web strands */}
-                <motion.div
-                  className="absolute -top-8 -right-8 w-16 h-16 opacity-30"
-                  animate={{
-                    y: [0, -15, 0],
-                    rotate: [0, 8, 0],
-                  }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <SpiderDecor type="web-strand" size="sm" opacity={0.6} animate={false} />
-                </motion.div>
-
-                {/* Floating animation for image itself */}
-                <motion.div
-                  className="absolute inset-4 rounded-full border-2 border-spiderman-red/20 z-20 pointer-events-none"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
-            </div>
+            <HudAvatar />
           </motion.div>
         </div>
       </motion.div>
@@ -293,4 +199,3 @@ export const Hero = () => {
     </section>
   );
 };
-

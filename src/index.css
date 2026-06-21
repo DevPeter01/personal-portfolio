@@ -139,3 +139,20 @@
     opacity: 1;
   }
 }
+
+@keyframes floatUp {
+  0%   { transform: translateY(0vh);    opacity: 0;    }
+  5%   { opacity: 0.065; }
+  90%  { opacity: 0.065; }
+  100% { transform: translateY(-110vh); opacity: 0;    }
+}
+
+@keyframes radarSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.03; }
+  50%       { opacity: 0.07; }
+}
