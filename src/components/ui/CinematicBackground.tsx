@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { CitySkyline } from './SpiderWeb';
+import { CyberCircuitBoard } from './CyberCircuitBoard';
 
 // ─────────────────────────────────────────
 // Developer code snippets for data streams
@@ -365,10 +365,8 @@ export const CinematicBackground = () => {
         />
       </div>
 
-      {/* ── LAYER 6: Cyber City Silhouette ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 opacity-50 z-[4] pointer-events-none">
-        <CitySkyline />
-      </div>
+      {/* ── LAYER 6: Cyber Circuit Board (replaces city skyline) ── */}
+      <CyberCircuitBoard />
 
       {/* ── LAYER 7: Scan-line HUD overlay ── */}
       <div
